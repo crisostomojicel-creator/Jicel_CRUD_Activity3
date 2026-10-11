@@ -1,0 +1,26 @@
+
+<h1>Edit Student</h1>
+
+<form method="POST" action="/students/{{student.id}}">
+    <input type="text" name="FirstName"
+        value="{{student.FirstName}}" placeholder="First Name" required>
+
+    <input type="text" name="LastName"
+        value="{{student.LastName}}" placeholder="Last Name" required>
+
+    <input type="text" name="MiddleName"
+        value="{{student.MiddleName}}" placeholder="Middle Name">
+
+    <input type="text" name="Program"
+        value="{{student.Program}}" placeholder="Program" required>
+
+    <input type="text" name="YearLevel"
+        value="{{student.YearLevel}}" placeholder="Year Level" required>
+
+    <input type="text" name="Section"
+        value="{{student.Section}}" placeholder="Section" required>
+
+    <button type="submit">Update Student</button>
+</form>
+
+<a href="/students">Back to Student List</a>

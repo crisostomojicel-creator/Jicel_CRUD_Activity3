@@ -1,0 +1,301 @@
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 30px;
+        background: #f4f7fb;
+        color: #1e293b;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .header {
+        background: #1e3a8a;
+        color: white;
+        padding: 24px 28px;
+        border-radius: 14px;
+        margin-bottom: 24px;
+    }
+
+    .header h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+    }
+
+    .header p {
+        margin: 0;
+        color: #dbeafe;
+    }
+
+    .card {
+        background: white;
+        padding: 24px;
+        border-radius: 12px;
+        margin-bottom: 24px;
+        box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+    }
+
+    .card h2 {
+        margin-top: 0;
+        font-size: 20px;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 7px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 11px 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 7px;
+        font-size: 14px;
+    }
+
+    .form-group input:focus {
+        outline: 2px solid #bfdbfe;
+        border-color: #2563eb;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 15px;
+        border: 0;
+        border-radius: 7px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .btn-add {
+        margin-top: 18px;
+        background: #2563eb;
+        color: white;
+    }
+
+    .btn-edit {
+        background: #dbeafe;
+        color: #1d4ed8;
+    }
+
+    .btn-delete {
+        background: #fee2e2;
+        color: #b91c1c;
+    }
+
+    .table-wrap {
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 700px;
+    }
+
+    th,
+    td {
+        text-align: left;
+        padding: 14px 12px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
+        background: #f8fafc;
+        color: #475569;
+        font-size: 13px;
+        text-transform: uppercase;
+    }
+
+    td {
+        font-size: 14px;
+    }
+
+    .actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .actions form {
+        margin: 0;
+    }
+
+    .empty {
+        padding: 24px;
+        text-align: center;
+        color: #64748b;
+    }
+
+    @media (max-width: 700px) {
+        body {
+            padding: 15px;
+        }
+
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .card {
+            padding: 16px;
+        }
+    }
+</style>
+
+<div class="container">
+    <div class="header">
+        <h1>Student Management System</h1>
+        <p>Manage student records, information, and enrollment details.</p>
+    </div>
+
+    <div class="card">
+        <h2>Add New Student</h2>
+
+        <form method="POST" action="/students">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="FirstName">First Name</label>
+                    <input
+                        type="text"
+                        id="FirstName"
+                        name="FirstName"
+                        placeholder="Enter first name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="LastName">Last Name</label>
+                    <input
+                        type="text"
+                        id="LastName"
+                        name="LastName"
+                        placeholder="Enter last name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="MiddleName">Middle Name</label>
+                    <input
+                        type="text"
+                        id="MiddleName"
+                        name="MiddleName"
+                        placeholder="Enter middle name"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="Program">Program</label>
+                    <input
+                        type="text"
+                        id="Program"
+                        name="Program"
+                        placeholder="e.g. BSIT"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="YearLevel">Year Level</label>
+                    <input
+                        type="text"
+                        id="YearLevel"
+                        name="YearLevel"
+                        placeholder="e.g. 3"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="Section">Section</label>
+                    <input
+                        type="text"
+                        id="Section"
+                        name="Section"
+                        placeholder="e.g. F3"
+                        required
+                    >
+                </div>
+            </div>
+
+            <button class="btn btn-add" type="submit">
+                + Add Student
+            </button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Student Records</h2>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Student Name</th>
+                        <th>Program</th>
+                        <th>Year</th>
+                        <th>Section</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {{#each students}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{FirstName}} {{MiddleName}} {{LastName}}</td>
+                        <td>{{Program}}</td>
+                        <td>{{YearLevel}}</td>
+                        <td>{{Section}}</td>
+                        <td>
+                            <div class="actions">
+                                <a
+                                    class="btn btn-edit"
+                                    href="/students/{{id}}"
+                                >Edit</a>
+
+                                <form
+                                    method="POST"
+                                    action="/students/{{id}}/delete"
+                                    onsubmit="return confirm('Delete this student?')"
+                                >
+                                    <button
+                                        class="btn btn-delete"
+                                        type="submit"
+                                    >Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {{else}}
+                    <tr>
+                        <td colspan="6" class="empty">
+                            No student records found.
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

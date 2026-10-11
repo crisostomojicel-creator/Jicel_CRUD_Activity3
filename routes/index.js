@@ -38,7 +38,6 @@ import {
     logoutUser
 } from "../controllers/authController.js";
 
-// Student Controller
 import { student } from "../controllers/student.js";
 
 const router = express.Router();
@@ -54,16 +53,21 @@ router.get("/register", registerPage);
 router.post("/register", registerUser);
 
 router.get("/forgot-password", forgotPasswordPage);
-
 router.get("/dashboard", dashboardPage);
-
 router.get("/logout", logoutUser);
 
 // Student CRUD
 router.get("/students", student.index);
 router.post("/students", student.insert);
-router.get("/students/:id", student.show);
-router.put("/students/:id", student.update);
-router.delete("/students/:id", student.delete);
+router.get("/students/:id", student.getStudent);
+router.post("/students/:id", student.update);
+router.post("/students/:id/delete", student.delete);
+
+// Student API for Postman
+router.get("/api/students", student.apiIndex);
+router.post("/api/students", student.apiInsert);
+router.get("/api/students/:id", student.apiShow);
+router.put("/api/students/:id", student.apiUpdate);
+router.delete("/api/students/:id", student.apiDelete);
 
 export default router;
